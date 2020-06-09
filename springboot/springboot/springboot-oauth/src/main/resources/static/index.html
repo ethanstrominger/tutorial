@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>Demo</title>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width"/>
+    <base href="/"/>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+<h1>Demo</h1>
+<div class="container unauthenticated">
+    <p>With GitHub: <a href="/oauth2/authorization/github">click here</a></p>
+    <p>With Google: <a href="/oauth2/authorization/google">click here</a></p>
+</div>
+Here are the resources I've spoken about:
+Elisabeth Hendrickson: "Explore It!"
+James Lyndsay's black box puzzles
+Alan Richardson's practice apps
+Maaret Pyhäjärvi's take on "How Would You Test a Text Field?" (blog post & slides)
+A very interesting parking cost calculator
+Mark Winteringham's practice API "Restful Booker"
+And here some more recommended resources:
+What is Exploratory Testing?
+What is Exploratory Testing — the Programmer Edition
+Explore Galore! 30 Tips to Supercharge your Exploratory Testing Efforts
+Power Hour - Exploratory Testing
+What is Exploratory Testing? An Alternative to Scripted Testing and Try To Break It Testing  
+Why I'm talking to developers about Exploratory Testing
+Just because you can automate everything ... doesn't mean you should
+Manual Testing and Automation: Better Together
+Intersection of Automation and Exploratory Testing by Maaret Pyhajarvi #SeConfIndia
+Teaching and Coaching Exploratory Testing - Maaret Pyhäjärvi
+Microheuristics  
+Test Heuristics Cheat Sheet
+<div class="container authenticated" style="display:none">
+    Logged in as: <span id="user"></span>
+    <div>
+        <button onClick="logout()" class="btn btn-primary">Logout</button>
+    </div>
+</div>
+<div class="container text-danger error"></div>
+<div class="container"></div>
+<script type="text/javascript">
+    $.ajaxSetup({
+    beforeSend : function(xhr, settings) {
+      if (settings.type == 'POST' || settings.type == 'PUT'
+          || settings.type == 'DELETE') {
+        if (!(/^http:.*/.test(settings.url) || /^https:.*/
+          .test(settings.url))) {
+          // Only send the token to relative URLs i.e. locally.
+            xhr.setRequestHeader("X-XSRF-TOKEN",
+              Cookies.get('XSRF-TOKEN'));
+          }
+        }
+      }
+    });
+    $.get("/user", function(data) {
+        if (data.name != null) {
+          $("#user").html(data.name);
+          $(".unauthenticated").hide()
+          $(".authenticated").show()
+        }
+    });
+    var logout = function() {
+    $.post("/logout", function() {
+        $("#user").html('');
+        $(".unauthenticated").show();
+        $(".authenticated").hide();
+    })
+    $.get("/error", function(data) {
+      if (data) {
+          $(".error").html(data);
+      } else {
+        $(".error").html('');
+      }
+    });
+    return true;
+}
+</script>
+<script type="text/javascript" src="/webjars/js-cookie/js.cookie.js"></script>
+</body>
+</html>
