@@ -16,9 +16,9 @@
 <script src="/socket.io/socket.io.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script>
-  const isSocketDefined = false;
+  let isSocketDefined = false;
   $(function () {
-    var socket = io();
+    const socket = io();
     // socket.id is not initialized until after the startup function is complete
     $('#messageform').children().focus (function() {
       console.log(socket.id+': field has focus');
