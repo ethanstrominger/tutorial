@@ -7,7 +7,7 @@ app.get('/', (req, res) => {
 });
 
 io.on('connection', (socket) => {
-  console.log('a user connected!');
+  console.log('a user connected! '+socket.id);
   socket.on('disconnect', () => {
     console.log('user disconnected');
   });
@@ -21,7 +21,7 @@ io.on('connection', (socket) => {
   });
   socket.on('user message', (msg) => {
     console.log('sending: ' + msg.from+' '+msg.message+' to: '+'user-'+msg.to);
-    io.sockets.in('user-'+msg.to).emit({'from':msg.from, 'message': msg.message});
+    io.sockets.in('user-'+msg.to).emit('user message',{'from':msg.from, 'message': msg.message});
   });
 });
 
