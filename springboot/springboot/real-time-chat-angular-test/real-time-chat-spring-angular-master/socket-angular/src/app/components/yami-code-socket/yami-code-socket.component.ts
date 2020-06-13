@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
-import { environment } from '../../../environments/environment';
+// import { environment } from '../../../environments/environment';
 import { SocketService } from '../../services/socket.service';
 import { ToastrService } from 'ngx-toastr';
 import { Message } from '../../model/message';
@@ -13,6 +13,7 @@ import { Message } from '../../model/message';
   templateUrl: './yami-code-socket.component.html',
   styleUrls: ['./yami-code-socket.component.css']
 })
+
 export class YamiCodeSocketComponent implements OnInit {
   private serverUrl = environment.url + 'socket'
   isLoaded: boolean = false;
@@ -21,8 +22,7 @@ export class YamiCodeSocketComponent implements OnInit {
   private form: FormGroup;
   private userForm: FormGroup;
   messages: Message[] = [];
-  constructor(private socketService: SocketService, private toastr: ToastrService
-  ) { }
+  constructor(private socketService: SocketService, private toastr: ToastrService)
 
   ngOnInit() {
     this.form = new FormGroup({

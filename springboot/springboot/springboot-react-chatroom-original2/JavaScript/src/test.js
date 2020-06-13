@@ -8,9 +8,10 @@ class Test {
   baseUrl = "http://localhost:8080/";
   serverUrl = baseUrl + 'socket';
   isLoaded = false;
-  initializeWebSocketConnection();
+  test = initializeWebSocketConnection();
 
   initializeWebSocketConnection() {
+      console.log('initialize');
       let ws = new SockJS();
       this.stompClient = Stomp.over(ws);
       let that = this;
