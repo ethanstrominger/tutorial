@@ -15,13 +15,13 @@ public class ChatController {
 
 	/*-------------------- Group (Public) chat--------------------*/
 	@MessageMapping("/sendMessage")
-	@SendTo("/topic/pubic")
+	@SendTo("/topic/public")
 	public ChatMessage sendMessage(@Payload ChatMessage chatMessage) {
 		return chatMessage;
 	}
 
 	@MessageMapping("/addUser")
-	@SendTo("/topic/pubic")
+	@SendTo("/topic/public")
 	public ChatMessage addUser(@Payload ChatMessage chatMessage,
 			SimpMessageHeaderAccessor headerAccessor) {
 		// Add user in web socket session
