@@ -1,14 +1,14 @@
 package com.ethan.springinitreactchat;
 
 // Used by GreetingController as control type when sending to client
-public class Greeting {
+public class MessageToClient {
 
     private String content;
   
-    public Greeting() {
+    public MessageToClient() {
     }
   
-    public Greeting(String content) {
+    public MessageToClient(String content) {
       this.content = content;
     }
   
