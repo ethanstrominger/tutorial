@@ -1,5 +1,6 @@
 package com.ethan.springinitreactchat;
 
+// Used as paramater GreetingController when receiving message from client
 public class HelloMessage {
 
   private String name;

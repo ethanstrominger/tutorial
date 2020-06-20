@@ -1,5 +1,6 @@
 package com.ethan.springinitreactchat;
 
+// Used by GreetingController as control type when sending to client
 public class Greeting {
 
     private String content;
